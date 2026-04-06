@@ -5,6 +5,8 @@ import java.util.List;
 
 import livres.Ouvrage;
 import livres.Auteur;
+import livres.Pays;
+import livres.Serie;
 
 /**
  * CoursPOO 1
@@ -18,7 +20,46 @@ public class TestOuvrage {
         TestOuvrage test = new TestOuvrage();
         test.testOuvrages();
         test.testTrouver();
+
+        System.out.println("\n=== TEST SERIE ===");
+
+        Serie serie = new Serie("Classiques");
+
+        Auteur auteur = null;
+        Ouvrage o1 = new Ouvrage("Les Miserables", auteur);
+        auteur = null;
+        Ouvrage o2 = new Ouvrage("Notre Dame", auteur);
+
+        serie.ajouterOuvrage(o1);
+        serie.ajouterOuvrage(o2);
+
+        System.out.println("Nombre d'ouvrages : " + serie.getOuvrages().size());
+
+        serie.enleverOuvrage(o1);
+
+        System.out.println("Après suppression : " + serie.getOuvrages().size());
+
+
+
+        serie.ajouterOuvrage(o1);
+        serie.ajouterOuvrage(o2);
+
+        System.out.println("Nombre d'ouvrages : " + serie.getOuvrages().size());
+
+        serie.enleverOuvrage(o1);
+
+        System.out.println("Après suppression : " + serie.getOuvrages().size());
+
+        Pays france = new Pays("France", "FRA");
+
+        auteur = new Auteur("Victor", "Hugo", france);
+
+        System.out.println("Branche 1");
+
+
     }
+
+
 
 
     public void testOuvrages() {
@@ -101,6 +142,8 @@ public class TestOuvrage {
         resultat = bibliotheque.trouverOuvrages(new Auteur("Jacques", "Beaulieu", "France"));
         System.out.println("Livres de Jacques: " + resultat);
     }
+
+
 
 
 }
