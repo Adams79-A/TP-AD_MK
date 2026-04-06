@@ -1,33 +1,40 @@
 package tests;
 
-import livres.Auteur;
-import livres.Ouvrage;
+import livres.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Librairie {
-    private List<Auteur> auteurs  = new ArrayList<>();
+
+    private List<Auteur> auteurs = new ArrayList<>();
     private List<Ouvrage> ouvrages = new ArrayList<>();
 
-    public Librairie(){
-        Auteur albertine = new Auteur("Albertine", "Tremblay", "CAN");
-        Auteur john = new Auteur("John", "Smith", "USA");
-        Auteur jean = new Auteur("Jean", "Némarre", "Suisse");
+    public Librairie() {
+
+        Pays canada = new Pays("Canada", "CAN");
+        Pays usa = new Pays("USA", "USA");
+        Pays suisse = new Pays("Suisse", "CHE");
+
+        Auteur albertine = new Auteur("Albertine", "Tremblay", canada);
+        Auteur john = new Auteur("John", "Smith", usa);
+        Auteur jean = new Auteur("Jean", "Némarre", suisse);
+
         auteurs.add(albertine);
         auteurs.add(john);
         auteurs.add(jean);
 
-        ouvrages.add(new Ouvrage("Titre 1", john));
-        ouvrages.add(new Ouvrage("Titre 2", albertine));
-        ouvrages.add(new Ouvrage("Titre 3", john));
-        ouvrages.add(new Ouvrage("Titre 4", john));
-        ouvrages.add(new Ouvrage("Titre 5", albertine));
-        ouvrages.add(new Ouvrage("Titre 6", john));
-        ouvrages.add(new Ouvrage("Titre 7", john));
-        ouvrages.add(new Ouvrage("Titre 8", albertine,Ouvrage.Format.VIDEO));
-        ouvrages.add(new Ouvrage("Titre 9", john,Ouvrage.Format.AUDIO));
-        ouvrages.add(new Ouvrage("Titre 10", jean));
+        // 🔥 NOUVEAU : utilisation des sous-classes
+
+        ouvrages.add(new OuvragePapier("Titre 1", john, 300));
+        ouvrages.add(new OuvragePapier("Titre 2", albertine, 250));
+        ouvrages.add(new OuvragePapier("Titre 3", john, 200));
+
+        ouvrages.add(new OuvrageAudio("Titre 4", john, 120, OuvrageAudio.FormatAudio.NUMERIQUE));
+        ouvrages.add(new OuvrageAudio("Titre 5", albertine, 90, OuvrageAudio.FormatAudio.ANALOGIQUE));
+
+        ouvrages.add(new OuvrageVideo("Titre 6", jean, 110, 1500));
+        ouvrages.add(new OuvrageVideo("Titre 7", john, 95, 2000));
     }
 
     public List<Auteur> getAuteurs() {
@@ -39,16 +46,14 @@ public class Librairie {
     }
 
     public List<Ouvrage> trouverOuvrages(Auteur auteur) {
-        //ATTENTION il faut implémenter equals dans auteur pour que ca marche!!!!!
-        int count = 0;
 
         List<Ouvrage> trouves = new ArrayList<>();
+
         for (Ouvrage ouvrage : ouvrages) {
             if (ouvrage.getAuteur().equals(auteur)) {
                 trouves.add(ouvrage);
             }
         }
-
         return trouves;
     }
 }
