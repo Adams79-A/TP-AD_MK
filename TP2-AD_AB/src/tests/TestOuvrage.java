@@ -71,7 +71,7 @@ public class TestOuvrage {
         System.out.println("Livres de john: " + resultat);
 
         resultat = bibliotheque.trouverOuvrages(new Auteur("Jacques", "Beaulieu", "France"));
-        System.out.println("Livres de Branche1 : " + resultat);
+        System.out.println("Livres de Branche2 : " + resultat);
     }
 
 
